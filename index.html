@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    (() => {
+      try {
+        if (localStorage.getItem("theme") === "light") {
+          document.documentElement.classList.add("light");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dr Lynett Erita Masiwa | Optometrist · Academic · Leadership</title>
+  <meta name="description" content="Dr Lynett Erita Masiwa brings together clinical optometry, academia, research and leadership to increase access to health care and education and create wider, deeper impact.">
+
+  <meta property="og:title" content="Dr Lynett Erita Masiwa | Optometrist · Academic · Leadership">
+  <meta property="og:description" content="Clinical optometry, academia, research and leadership focused on increasing access to health care and education.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <!-- Add og:image later: 1200x630 PNG matching dark theme -->
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Dr Lynett Erita Masiwa | Optometrist · Academic · Leadership">
+  <meta name="twitter:description" content="Clinical optometry, academia, research and leadership focused on increasing access to health care and education.">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E👁️%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #020a18;
+      --bg-grad: linear-gradient(170deg, #020a18 0%, #041028 40%, #06142e 70%, #020a18 100%);
+      --surface: rgba(8,24,56,0.85);
+      --border: rgba(0,170,255,0.12);
+      --border-glow: rgba(0,170,255,0.3);
+      --text: #d0e0f0;
+      --text-bright: #e8f0ff;
+      --text-dim: #6888aa;
+      --neon: #00aaff;
+      --cyan: #00e5ff;
+      --green: #00ff88;
+      --amber: #ffaa00;
+      --red: #ff4466;
+      --purple: #aa66ff;
+
+      --header-bg: rgba(2,10,24,0.72);
+      --grid: rgba(120,190,255,0.03);
+      --shadow: rgba(0,0,0,0.22);
+      --button-text: #00101d;
+      --orb-blue: rgba(0,170,255,0.08);
+      --orb-purple: rgba(170,102,255,0.08);
+      --orb-green: rgba(0,255,136,0.065);
+    }
+
+    html.light {
+      --bg: #eef4fb;
+      --bg-grad: linear-gradient(170deg, #f8fbff 0%, #edf5ff 40%, #e8f1fb 70%, #f7fbff 100%);
+      --surface: rgba(255,255,255,0.88);
+      --border: rgba(0,95,170,0.16);
+      --border-glow: rgba(0,115,190,0.28);
+      --text: #263b50;
+      --text-bright: #0c2035;
+      --text-dim: #60788f;
+      --neon: #006fbd;
+      --cyan: #008da5;
+      --green: #087a52;
+      --amber: #9b6500;
+      --red: #c52d4e;
+      --purple: #7047bd;
+
+      --header-bg: rgba(244,249,255,0.82);
+      --grid: rgba(0,70,130,0.04);
+      --shadow: rgba(24,55,85,0.12);
+      --button-text: #ffffff;
+      --orb-blue: rgba(0,130,220,0.07);
+      --orb-purple: rgba(112,71,189,0.06);
+      --orb-green: rgba(8,122,82,0.055);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg-grad);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    a {
+      color: var(--neon);
+      text-decoration: none;
+      transition: color .2s ease, text-shadow .2s ease;
+    }
+
+    a:hover {
+      color: var(--cyan);
+      text-shadow: 0 0 14px var(--border-glow);
+    }
+
+    button { font: inherit; }
+
+    .orbs {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .orb {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(100px);
+      will-change: transform;
+    }
+
+    .orb-one {
+      top: 4%;
+      left: calc(50% - 850px);
+      background: var(--orb-blue);
+      animation: orbitOne 24s ease-in-out infinite alternate;
+    }
+
+    .orb-two {
+      top: 42%;
+      right: calc(50% - 900px);
+      background: var(--orb-purple);
+      animation: orbitTwo 30s ease-in-out infinite alternate;
+    }
+
+    .orb-three {
+      bottom: -10%;
+      left: calc(50% - 820px);
+      background: var(--orb-green);
+      animation: orbitThree 28s ease-in-out infinite alternate;
+    }
+
+    @keyframes orbitOne {
+      to { transform: translate(90px, 100px) scale(1.14); }
+    }
+
+    @keyframes orbitTwo {
+      to { transform: translate(-100px, -75px) scale(.9); }
+    }
+
+    @keyframes orbitThree {
+      to { transform: translate(120px, -80px) scale(1.1); }
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--header-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      color: var(--text-bright);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .icon-button {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, color .2s ease;
+    }
+
+    .icon-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-glow);
+      color: var(--cyan);
+    }
+
+    .icon-button svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .hero {
+      padding: 110px 0 92px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 20px;
+      color: var(--cyan);
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      color: var(--text-bright);
+      font-size: clamp(3rem, 9vw, 6rem);
+      line-height: .98;
+      letter-spacing: -.065em;
+    }
+
+    .role {
+      margin: 20px 0 0;
+      color: var(--neon);
+      font-size: clamp(1rem, 2.5vw, 1.22rem);
+      font-weight: 600;
+      letter-spacing: .04em;
+    }
+
+    .hero-statement {
+      max-width: 780px;
+      margin: 42px 0 0;
+      color: var(--text-bright);
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      line-height: 1.3;
+      letter-spacing: -.035em;
+      font-weight: 600;
+    }
+
+    .hero-sub {
+      max-width: 680px;
+      margin: 24px 0 0;
+      color: var(--text-dim);
+      font-size: 1.02rem;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 36px;
+      padding: 13px 20px;
+      border: 1px solid var(--neon);
+      border-radius: 12px;
+      background: var(--neon);
+      color: var(--button-text);
+      font-weight: 700;
+      box-shadow: 0 0 30px rgba(0,170,255,.12);
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      color: var(--button-text);
+      background: var(--cyan);
+      box-shadow: 0 8px 32px rgba(0,170,255,.22);
+      text-shadow: none;
+    }
+
+    .cta svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .sections {
+      padding-bottom: 90px;
+    }
+
+    .section {
+      margin-bottom: 14px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: var(--surface);
+      box-shadow: 0 14px 45px var(--shadow);
+      overflow: hidden;
+      transition: border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .section:hover {
+      border-color: var(--border-glow);
+    }
+
+    .section-toggle {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 42px 1fr 32px;
+      align-items: center;
+      gap: 14px;
+      padding: 22px 24px;
+      border: 0;
+      background: transparent;
+      color: var(--text-bright);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .number {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border-glow);
+      border-radius: 50%;
+      color: var(--cyan);
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-size: 1.04rem;
+      font-weight: 700;
+      letter-spacing: -.01em;
+    }
+
+    .plusminus {
+      justify-self: end;
+      color: var(--text-dim);
+      font-size: 1.45rem;
+      font-weight: 300;
+    }
+
+    .section-body {
+      display: grid;
+      grid-template-rows: 1fr;
+      transition: grid-template-rows .38s ease;
+    }
+
+    .section-body-inner {
+      overflow: hidden;
+    }
+
+    .section-content {
+      padding: 0 24px 28px 80px;
+      max-width: 760px;
+    }
+
+    .section-content p:first-child { margin-top: 0; }
+    .section-content p:last-child { margin-bottom: 0; }
+
+    .section.closed .section-body {
+      grid-template-rows: 0fr;
+    }
+
+    .section.closed .plusminus::before { content: "+"; }
+    .section:not(.closed) .plusminus::before { content: "−"; }
+
+    .work-list {
+      list-style: none;
+      margin: 24px 0 0;
+      padding: 0;
+    }
+
+    .work-list li {
+      position: relative;
+      padding: 0 0 18px 24px;
+    }
+
+    .work-list li:last-child { padding-bottom: 0; }
+
+    .work-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .72em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 10px rgba(0,255,136,.45);
+    }
+
+    .accent {
+      color: var(--text-bright);
+      font-weight: 600;
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .contact-card .cta {
+      flex: 0 0 auto;
+      margin-top: 3px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: .82rem;
+    }
+
+    .footer-inner {
+      min-height: 84px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 78px 0 66px;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 16vw, 4.5rem);
+      }
+
+      .section-toggle {
+        grid-template-columns: 38px 1fr 25px;
+        padding: 20px 18px;
+        gap: 11px;
+      }
+
+      .section-content {
+        padding: 0 18px 24px;
+      }
+
+      .contact-card {
+        display: block;
+      }
+
+      .contact-card .cta {
+        margin-top: 24px;
+      }
+
+      .footer-inner {
+        padding: 22px 0;
+        display: block;
+      }
+
+      .footer-inner span {
+        display: block;
+      }
+
+      .footer-inner span + span {
+        margin-top: 4px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="orbs" aria-hidden="true">
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+    <div class="orb orb-three"></div>
+  </div>
+
+  <div class="page">
+    <header>
+      <div class="container header-inner">
+        <a class="brand" href="#top">Dr Lynett Erita Masiwa</a>
+
+        <div class="header-actions">
+          <button
+            class="icon-button"
+            id="themeToggle"
+            type="button"
+            title="Toggle light/dark theme"
+            aria-label="Toggle light/dark theme"
+          ></button>
+
+          <button
+            class="icon-button"
+            id="collapseToggle"
+            type="button"
+            title="Collapse or expand all sections"
+            aria-label="Collapse or expand all sections"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 9l5-5 5 5"></path>
+              <path d="M7 15l5 5 5-5"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <div class="container">
+        <section class="hero">
+          <div class="eyebrow">Optometry · Academia · Leadership</div>
+
+          <h1>Dr Lynett<br>Erita Masiwa</h1>
+
+          <p class="role">OPTOMETRIST | ACADEMIC | LEADERSHIP</p>
+
+          <p class="hero-statement">
+            I bring together clinical optometry, academia, research and leadership to increase access to health care and education and create wider, deeper impact.
+          </p>
+
+          <p class="hero-sub">
+            A professional journey spanning comprehensive eye care, tertiary education, research, advocacy and organisational leadership.
+          </p>
+
+          <a class="cta" href="mailto:lmasiwa@medsch.uz.ac.zw">
+            Get in touch
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14"></path>
+              <path d="m14 7 5 5-5 5"></path>
+            </svg>
+          </a>
+        </section>
+
+        <div class="sections">
+
+          <section class="section" id="about">
+            <button class="section-toggle" type="button" aria-expanded="true">
+              <span class="number">1</span>
+              <span class="section-title">About Me</span>
+              <span class="plusminus" aria-hidden="true"></span>
+            </button>
+
+            <div class="section-body">
+              <div class="section-body-inner">
+                <div class="section-content">
+                  <p>
+                    I am an <span class="accent">Optometrist, Academic and Leader</span> with fifteen years of clinical experience and a decade in academia.
+                  </p>
+                  <p>
+                    My work brings together clinical eye care, research, education, advocacy and organisational leadership. A solid foundation in science and a broad range of leadership roles have allowed me to actively increase access to health care services and tertiary education and contribute to transforming organisations.
+                  </p>
+                  <p>
+                    I am keen on opportunities that allow me a wider reach and deeper impact.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="clinical">
+            <button class="section-toggle" type="button" aria-expanded="true">
+              <span class="number">2</span>
+              <span class="section-title">Clinical Optometry</span>
+              <span class="plusminus" aria-hidden="true"></span>
+            </button>
+
+            <div class="section-body">
+              <div class="section-body-inner">
+                <div class="section-content">
+                  <p>
+                    Increasing access to eye care is a key part of my life purpose. My clinical work includes comprehensive eye care for the general public, including geriatric and paediatric patients.
+                  </p>
+
+                  <ul class="work-list">
+                    <li>
+                      <span class="accent">Fifteen years of clinical experience</span> across comprehensive eye care, with experience serving people from all walks of life.
+                    </li>
+                    <li>
+                      <span class="accent">Founding Director of Eye Do and The Village Eye Attic</span>, where increasing access to eye care is a key part of my life purpose.
+                    </li>
+                    <li>
+                      Clinical leadership encompassing team development, in-house training, business strategy and implementation for increased impact.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="academic">
+            <button class="section-toggle" type="button" aria-expanded="true">
+              <span class="number">3</span>
+              <span class="section-title">Academic &amp; Research Work</span>
+              <span class="plusminus" aria-hidden="true"></span>
+            </button>
+
+            <div class="section-body">
+              <div class="section-body-inner">
+                <div class="section-content">
+                  <p>
+                    My academic work combines teaching, curriculum development, research collaboration, supervision and evidence synthesis.
+                  </p>
+
+                  <ul class="work-list">
+                    <li>
+                      <span class="accent">Spearheaded the introduction of the first BSc Optometry curriculum in Zimbabwe</span>, from advocacy and content development through accreditation and delivery of lectures.
+                    </li>
+                    <li>
+                      Research Fellow at the <span class="accent">University of Zimbabwe</span>, with experience coordinating international research teams, ethical clearance, grant applications and research record keeping.
+                    </li>
+                    <li>
+                      Experience delivering theoretical and clinical modules at tertiary level and serving as a supervisor and examiner of undergraduate and postgraduate students.
+                    </li>
+                    <li>
+                      Advanced evidence synthesis to inform best practices is a strong quality I bring to academic and research work.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="leadership">
+            <button class="section-toggle" type="button" aria-expanded="true">
+              <span class="number">4</span>
+              <span class="section-title">Leadership &amp; Impact</span>
+              <span class="plusminus" aria-hidden="true"></span>
+            </button>
+
+            <div class="section-body">
+              <div class="section-body-inner">
+                <div class="section-content">
+                  <p>
+                    My leadership experience spans academia, professional advocacy, governance and organisational strategy.
+                  </p>
+
+                  <ul class="work-list">
+                    <li>
+                      Board-level experience in tertiary education, including service as <span class="accent">Vice Chairperson of the Higher Education Examinations Council</span> in Zimbabwe.
+                    </li>
+                    <li>
+                      Advocacy focused on increasing awareness and access to optometry services and contributing to dialogue around the scope of optometry practice in Zimbabwe.
+                    </li>
+                    <li>
+                      Experience in strategy development, corporate governance, regulatory compliance, policy implementation and organisational decision-making.
+                    </li>
+                    <li>
+                      A professional speaker who regularly presents at conferences on topics linked to specialist interests in Optometry.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="contact">
+            <button class="section-toggle" type="button" aria-expanded="true">
+              <span class="number">5</span>
+              <span class="section-title">Work With Me</span>
+              <span class="plusminus" aria-hidden="true"></span>
+            </button>
+
+            <div class="section-body">
+              <div class="section-body-inner">
+                <div class="section-content contact-card">
+                  <div>
+                    <p>
+                      I am open to opportunities where my experience in <span class="accent">clinical optometry, academia, research and leadership</span> can contribute to meaningful work and wider impact.
+                    </p>
+                    <p>
+                      For professional opportunities, collaborations or work enquiries, get in touch.
+                    </p>
+                  </div>
+
+                  <a class="cta" href="mailto:lmasiwa@medsch.uz.ac.zw">
+                    Contact me
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M5 12h14"></path>
+                      <path d="m14 7 5 5-5 5"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container footer-inner">
+        <span>© <span id="year"></span> Dr Lynett Erita Masiwa</span>
+        <span>Built with the AI Badge</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const themeToggle = document.getElementById("themeToggle");
+      const collapseToggle = document.getElementById("collapseToggle");
+      const sections = [...document.querySelectorAll(".section")];
+
+      const sunIcon = `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="m4.93 4.93 1.42 1.42"></path>
+          <path d="m17.66 17.66 1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="m6.34 17.66-1.41 1.41"></path>
+          <path d="m19.07 4.93-1.41 1.42"></path>
+        </svg>`;
+
+      const moonIcon = `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.5 14.3A8.5 8.5 0 0 1 9.7 3.5 8.5 8.5 0 1 0 20.5 14.3Z"></path>
+        </svg>`;
+
+      function updateThemeIcon() {
+        themeToggle.innerHTML = root.classList.contains("light")
+          ? moonIcon
+          : sunIcon;
+      }
+
+      updateThemeIcon();
+
+      themeToggle.addEventListener("click", () => {
+        root.classList.toggle("light");
+        const theme = root.classList.contains("light") ? "light" : "dark";
+
+        try {
+          localStorage.setItem("theme", theme);
+        } catch (e) {}
+
+        updateThemeIcon();
+      });
+
+      sections.forEach(section => {
+        const button = section.querySelector(".section-toggle");
+
+        button.addEventListener("click", () => {
+          const closed = section.classList.toggle("closed");
+          button.setAttribute("aria-expanded", String(!closed));
+        });
+      });
+
+      let allCollapsed = false;
+
+      collapseToggle.addEventListener("click", () => {
+        allCollapsed = !allCollapsed;
+
+        sections.forEach(section => {
+          section.classList.toggle("closed", allCollapsed);
+          section
+            .querySelector(".section-toggle")
+            .setAttribute("aria-expanded", String(!allCollapsed));
+        });
+
+        collapseToggle.title = allCollapsed
+          ? "Expand all sections"
+          : "Collapse all sections";
+      });
+
+      document.getElementById("year").textContent =
+        new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
